@@ -1,13 +1,13 @@
 version: '2'
 services:
   buildbot:
-    image: buildbot/buildbot-master:latest
+    image: tardyp/buildbot-master
     env_file: db.env
     environment:
         - BUILDBOT_CONFIG_DIR=config
         - BUILDBOT_CONFIG_URL=https://github.com/buildbot/buildbot-docker-example-config/archive/master.tar.gz
         - BUILDBOT_WORKER_PORT=9989
-        - BUILDBOT_WEB_URL=http://localhost:8080/
+        - BUILDBOT_WEB_URL=http://209.177.90.148:8080/
         - BUILDBOT_WEB_PORT=8080
     links:
       - db
@@ -15,6 +15,7 @@ services:
       - db
     ports:
       - "8080:8080"
+    fip: 209.177.90.148
   db:
     env_file: db.env
     image: "postgres:9.4"
